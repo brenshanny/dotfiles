@@ -1,1 +1,52 @@
-/Users/brendanshanny/.vimrc
+execute pathogen#infect()
+syntax enable
+filetype plugin indent on
+
+set tabstop=4
+set shiftwidth=2
+set expandtab
+set nu
+set hls
+set lazyredraw
+
+
+let g:BASH_Ctrl_j = 'off'
+
+let g:fzf_launcher = "/Users/brendanshanny/iterm_preferences/scripts/fzf_MacVim.scpt %s"
+
+
+autocmd vimenter * NERDTree
+autocmd vimenter * wincmd w
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+set background=dark
+colorscheme gruvbox
+
+set rtp+=/usr/local/opt/fzf
+set nobackup
+set noswapfile
+
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+map <Leader> <Plug>(easymotion-prefix)
+
+:nnoremap <C-\> :FZF ~/SecureDocs/source/vdr-app/ <CR>
+
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
