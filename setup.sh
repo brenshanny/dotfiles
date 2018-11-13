@@ -56,3 +56,8 @@ if [ ! -f ~/.tmux.conf ]; then
   echo "Symlinking tmux.conf"
   ln -s ~/Repositories/dotfiles/.tmux.conf ~/.tmux.conf
 fi
+
+if [ ! -f ~/.gitconfig ]; then
+  echo "Symlinking gitconfig"
+  ln -s ~/Repositories/dotfiles/.gitconfig ~/.gitconfig
+fi

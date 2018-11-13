@@ -1,0 +1,28 @@
+[user]
+	email = brendan.shanny@gmail.com
+    name = Brendan Shanny
+	signingkey = 02165FF3
+
+[alias]
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	co = checkout
+	b = branch
+	c = commit
+	st = status
+	b = branch
+    p = pull
+    recent = !git for-each-ref refs/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset)|%(color:bold green)%(committerdate:relative)%(color:reset)|%(contents:lines=1)|%(color:magenta)%(authorname)%(color:reset)' --count 100 --sort=-committerdate | column -ts '|' | less -SXRF
+    fetch-pulls = !git -c remote.origin.fetch="+refs/pull/*/head:refs/remotes/origin/pull/*" fetch
+[color]
+        branch = auto
+        diff = auto
+        interactive = auto
+        status = auto
+[core]
+	excludesfile = /Users/brendanshanny/.gitignore_gloabl
+	editor = /Applications/MacVim.app/Contents/MacOS/Vim
+[commit]
+	gpgsign = false
+[gpg]
+	program = gpg
