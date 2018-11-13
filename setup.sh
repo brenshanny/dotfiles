@@ -37,3 +37,10 @@ if [ ! "$(ls ~/.vim/bundle/)" ]; then
   git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
 fi
 
+if [ ! -f ~/.vimrc ]; then
+  ln -s ~/Repositories/dotfiles/.vimrc ~/.vimrc
+fi
+
+if [ ! -f ~/.tmux.conf ]; then
+  ln -s ~/Repositories/dotfiles/.tmux.conf ~/.tmux.conf
+fi
