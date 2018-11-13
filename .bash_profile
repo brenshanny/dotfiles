@@ -1,22 +1,25 @@
- 
 PS1="\[\033[35m\]\t\[\033[m\]||\[\033[32m\]\w\[\033[m\]\$ "
 export PATH="$HOME/.cargo/bin:$PATH"
 # source ~/bin/virtualenvwrapper.sh
 # export JAVA_HOME="/usr/bin/java"
 export PATH="$PATH:/Users/brendanshanny/java/apache-maven-3.5.3/bin/"
- 
- 
+
+
 #--- PERSONAL
 alias editprofile="vi ~/.bash_profile"
 alias resource="echo Well then, there ya go... && source ~/.bash_profile"
 export DEFAULT_USER="brendanshanny"
-eval "$(rbenv init -)"
-alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
-alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
-alias vi='vim'
- 
- 
- 
+if [ "$($COMP_ENV)" == "securedocs" ]; then
+  eval "$(rbenv init -)"
+fi
+if [ -d /Applications/MacVim.app/Contents ]; then
+  alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
+  alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+  alias vi='vim'
+fi
+
+
+
 #--- SecureDocs
 export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
 export PATH="/opt/chefdk/bin:$PATH"
@@ -51,7 +54,9 @@ function stashp() {
 function stashd() {
   git stash drop stash@{$1}
 }
-source ~/.git-completion.bash
+if [ "$(uname -s)" == "Darwin" ]; then
+  source ~/.git-completion.bash
+fi
 export GPG_TTY=${tty}
 
 #--- docker-sync checker
