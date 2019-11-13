@@ -1,6 +1,6 @@
 [user]
 	email = brendan.shanny@gmail.com
-    name = Brendan Shanny
+	name = Brendan Shanny
 	signingkey = 02165FF3
 
 [alias]
@@ -26,3 +26,8 @@
 	gpgsign = false
 [gpg]
 	program = gpg
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

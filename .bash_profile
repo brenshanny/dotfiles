@@ -4,18 +4,25 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # export JAVA_HOME="/usr/bin/java"
 export PATH="$PATH:/Users/brendanshanny/java/apache-maven-3.5.3/bin/"
 
+# The Fuck
+eval $(thefuck --alias fuck)
+
 
 #--- PERSONAL
 alias editprofile="vi ~/.bash_profile"
 alias resource="echo Well then, there ya go... && source ~/.bash_profile"
 export DEFAULT_USER="brendanshanny"
-if [ "$($COMP_ENV)" == "securedocs" ]; then
-  eval "$(rbenv init -)"
-fi
+# if [ "$($COMP_ENV)" == "securedocs" ]; then
+eval "$(rbenv init -)"
+# fi
 if [ -d /Applications/MacVim.app/Contents ]; then
   alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
   alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
   alias vi='vim'
+fi
+
+if [ -f /usr/local/opt/mcfly/mcfly-bash.sh ]; then
+  . /usr/local/opt/mcfly/mcfly-bash.sh
 fi
 
 
@@ -48,6 +55,10 @@ alias stashl="git stash list"
 alias stash="git stash save"
 alias fixgpg="export GPG_TTY=${tty}"
 alias rebase="echo Fetching...; git fetch; echo Done; echo Rebasing...; git rebase; echo Done;"
+function jumpin() {
+  combo=`docker ps | grep combo_combo | awk '{ print $1 }'`
+  docker exec -it $combo bash
+}
 function stashp() {
   git stash pop stash@{$1}
 }
@@ -68,8 +79,17 @@ alias ta="tmux attach -t"
 alias tn="tmux new -s"
 alias tk="tmux kill-session -t"
 alias tls="tmux ls"
+set ignoreeof  # Same as setting IGNOREEOF=10
+
 
 #--- python
 export PATH="/Users/brendanshanny/bin/:$PATH"
 export WORKON_HOME=~/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python3"
+
+if [ -f ~/.bash_local ]; then
+  source ~/.bash_local
+fi
+
+# GO
+export GOPATH="$HOME/go"

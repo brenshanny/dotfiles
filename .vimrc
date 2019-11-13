@@ -2,14 +2,15 @@ execute pathogen#infect()
 syntax enable
 filetype plugin indent on
 
-set tabstop=4
+set tabstop=2
 set shiftwidth=2
 set expandtab
 set nu
 set hls
 set lazyredraw
-:set colorcolumn=79
+set nocursorline
 
+" Whitespace highlighting
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * highlight ExtraWhitespace ctermbg=red guibg=red
@@ -22,9 +23,8 @@ let g:BASH_Ctrl_j = 'off'
 
 let g:fzf_launcher = "/Users/brendanshanny/iterm_preferences/scripts/fzf_MacVim.scpt %s"
 
-
-autocmd vimenter * NERDTree
-autocmd vimenter * wincmd w
+" autocmd vimenter * NERDTree
+" autocmd vimenter * wincmd w
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 set background=dark
@@ -45,12 +45,10 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-map <Leader> <Plug>(easymotion-prefix)
+nnoremap <C-u> kddpk
+nnoremap <C-y> ddp
 
-nnoremap <C-K> kddpk
-nnoremap <C-J> ddp
-
-:nnoremap <C-\> :FZF ~/SecureDocs/source/vdr-app/ <CR>
+:nnoremap <C-\> :GFiles <CR>
 
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
@@ -68,17 +66,9 @@ vnoremap <silent> # :<C-U>
 let g:ruby_indent_assignment_style = 'variable'
 let g:ruby_indent_block_style = 'do'
 
-" create directory on save if directory does not exist
-" https://stackoverflow.com/questions/4292733/vim-creating-parent-directories-on-save
-function! s:MkNonExDir(file, buf)
-    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
-        let dir=fnamemodify(a:file, ':h')
-        if !isdirectory(dir)
-            call mkdir(dir, 'p')
-        endif
-    endif
-endfunction
-augroup BWCCreateDir
-    autocmd!
-    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
-augroup END
+" Ale Linting
+let g:ale_linters = {'javascript': ['eslint']}
+let g:ale_linters_explicit = 1
+
+nmap <silent> <C-m> <Plug>(ale_next_wrap)
+nmap <silent> <C-n> <Plug>(ale_previous_wrap)
