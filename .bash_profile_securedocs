@@ -1,13 +1,13 @@
 #--- SecureDocs
 export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
 export PATH="/opt/chefdk/bin:$PATH"
-export PATH="/Users/brendanshanny/SecureDocs/dev-utils/bin:$PATH"
-alias vash="cd ~/SecureDocs/ && vagrant ssh"
-alias cdvdr="cd ~/SecureDocs/source/vdr-app/"
-alias cdsso="cd ~/SecureDocs/source/sso-app/"
-alias switch_vdr="cd ~/SecureDocs/ && devapp.sh vdr2 && vagrant up"
-alias switch_admin="cd ~/SecureDocs/ && devapp.sh billing && vagrant up"
-alias rmnode="rm -rf ~/Securedocs/source/vdr-app/node_modules"
+export PATH="/Users/brendanshanny/work/dev-utils/bin:$PATH"
+alias vash="cd ~/work/ && vagrant ssh"
+alias cdvdr="cd ~/work/source/vdr-app/"
+alias cdsso="cd ~/work/source/sso-app/"
+alias switch_vdr="cd ~/work/ && devapp.sh vdr2 && vagrant up"
+alias switch_admin="cd ~/work/ && devapp.sh billing && vagrant up"
+alias rmnode="rm -rf ~/work/source/vdr-app/node_modules"
 alias comboup="cdvdr && ./bin/combo run --service-ports combo bash"
 alias combodown="cdvdr && ./bin/combo down && clean_docker_shit"
 alias comboreset="combodown && comboup"
@@ -20,5 +20,5 @@ function jumpin() {
 }
 
 #--- docker-sync checker
-export DOCKER_SYNC_CHECKER="/Users/brendanshanny/SecureDocs/source/vdr-app/docker-sync-checker.txt"
-export DOCKER_SYNC_LOG="/Users/brendanshanny/SecureDocs/source/vdr-app/.docker-sync/daemon.log"
+export DOCKER_SYNC_CHECKER="/Users/brendanshanny/work/source/vdr-app/docker-sync-checker.txt"
+export DOCKER_SYNC_LOG="/Users/brendanshanny/work/source/vdr-app/.docker-sync/daemon.log"
