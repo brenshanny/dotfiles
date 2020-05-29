@@ -1,51 +1,18 @@
 PS1="\[\033[35m\]\t\[\033[m\]||\[\033[32m\]\w\[\033[m\]\$ "
-export PATH="$HOME/.cargo/bin:$PATH"
-# source ~/bin/virtualenvwrapper.sh
-# export JAVA_HOME="/usr/bin/java"
-export PATH="$PATH:/Users/brendanshanny/java/apache-maven-3.5.3/bin/"
+HOST_OS="$(uname -s)"
 
-# The Fuck
-eval $(thefuck --alias fuck)
+if [ $HOST_OS = "Darwin" ]; then
+ [ -f ~/.bash_profile_mac ] && source ~/.bash_profile_mac
+ [ -f ~/.bash_profile_securedocs ] && source ~/.bash_profile_securedocs
+ [ -f ~/.git-completion.bash ] && source ~/.git-completion.bash
+fi
+[ -f ~/.bash_local ] && source ~/.bash_local
 
 
 #--- PERSONAL
-alias editprofile="vi ~/.bash_profile"
-alias resource="echo Well then, there ya go... && source ~/.bash_profile"
 export DEFAULT_USER="brendanshanny"
-# if [ "$($COMP_ENV)" == "securedocs" ]; then
-eval "$(rbenv init -)"
-# fi
-if [ -d /Applications/MacVim.app/Contents ]; then
-  alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
-  alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
-  alias vi='vim'
-fi
-
-if [ -f /usr/local/opt/mcfly/mcfly-bash.sh ]; then
-  . /usr/local/opt/mcfly/mcfly-bash.sh
-fi
-
-
-
-#--- SecureDocs
-export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
-export PATH="/opt/chefdk/bin:$PATH"
-export PATH="/Users/brendanshanny/SecureDocs/dev-utils/bin:$PATH"
-alias vash="cd ~/SecureDocs/ && vagrant ssh"
-alias cdvdr="cd ~/SecureDocs/source/vdr-app/"
-alias cdsso="cd ~/SecureDocs/source/sso-app/"
-alias switch_vdr="cd ~/SecureDocs/ && devapp.sh vdr2 && vagrant up"
-alias switch_admin="cd ~/SecureDocs/ && devapp.sh billing && vagrant up"
-alias rmnode="rm -rf ~/Securedocs/source/vdr-app/node_modules"
-alias comboup="cdvdr && ./bin/combo run --service-ports combo bash"
-alias combodown="cdvdr && ./bin/combo down && clean_docker_shit"
-alias comboreset="combodown && comboup"
-alias clean_docker_shit="docker volume ls -qf dangling=true | xargs docker volume rm"
-
-function aws_login() {
-  $(aws ecr get-login --region us-east-1 --no-include-email)
-}
-
+alias resource="echo ---------------------- && echo Pouring another cup... && echo ---------------------- && source ~/.bash_profile"
+alias editprofile="vi ~/.bash_profile"
 
 #--- git
 alias gst="git st"
@@ -55,24 +22,7 @@ alias stashl="git stash list"
 alias stash="git stash save"
 alias fixgpg="export GPG_TTY=${tty}"
 alias rebase="echo Fetching...; git fetch; echo Done; echo Rebasing...; git rebase; echo Done;"
-function jumpin() {
-  combo=`docker ps | grep combo_combo | awk '{ print $1 }'`
-  docker exec -it $combo bash
-}
-function stashp() {
-  git stash pop stash@{$1}
-}
-function stashd() {
-  git stash drop stash@{$1}
-}
-if [ "$(uname -s)" == "Darwin" ]; then
-  source ~/.git-completion.bash
-fi
 export GPG_TTY=${tty}
-
-#--- docker-sync checker
-export DOCKER_SYNC_CHECKER="/Users/brendanshanny/SecureDocs/source/vdr-app/docker-sync-checker.txt"
-export DOCKER_SYNC_LOG="/Users/brendanshanny/SecureDocs/source/vdr-app/.docker-sync/daemon.log"
 
 #--- tmux
 alias ta="tmux attach -t"
@@ -81,15 +31,24 @@ alias tk="tmux kill-session -t"
 alias tls="tmux ls"
 set ignoreeof  # Same as setting IGNOREEOF=10
 
+#--- GO
+export GOPATH="$HOME/go"
 
-#--- python
-export PATH="/Users/brendanshanny/bin/:$PATH"
-export WORKON_HOME=~/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python3"
+#--- Ruby
+eval "$(rbenv init -)"
 
-if [ -f ~/.bash_local ]; then
-  source ~/.bash_local
+#--- Other
+if [ -f /usr/local/opt/mcfly/mcfly-bash.sh ]; then
+  . /usr/local/opt/mcfly/mcfly-bash.sh
 fi
 
-# GO
-export GOPATH="$HOME/go"
+#--- Functions
+function aws_login() {
+  $(aws ecr get-login --region us-east-1 --no-include-email)
+}
+function stashp() {
+  git stash pop stash@{$1}
+}
+function stashd() {
+  git stash drop stash@{$1}
+}

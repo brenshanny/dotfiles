@@ -1,0 +1,24 @@
+#--- SecureDocs
+export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
+export PATH="/opt/chefdk/bin:$PATH"
+export PATH="/Users/brendanshanny/SecureDocs/dev-utils/bin:$PATH"
+alias vash="cd ~/SecureDocs/ && vagrant ssh"
+alias cdvdr="cd ~/SecureDocs/source/vdr-app/"
+alias cdsso="cd ~/SecureDocs/source/sso-app/"
+alias switch_vdr="cd ~/SecureDocs/ && devapp.sh vdr2 && vagrant up"
+alias switch_admin="cd ~/SecureDocs/ && devapp.sh billing && vagrant up"
+alias rmnode="rm -rf ~/Securedocs/source/vdr-app/node_modules"
+alias comboup="cdvdr && ./bin/combo run --service-ports combo bash"
+alias combodown="cdvdr && ./bin/combo down && clean_docker_shit"
+alias comboreset="combodown && comboup"
+alias clean_docker_shit="docker volume ls -qf dangling=true | xargs docker volume rm"
+export PATH="$PATH:/Users/brendanshanny/java/apache-maven-3.5.3/bin/"
+
+function jumpin() {
+  combo=`docker ps | grep combo_combo | awk '{ print $1 }'`
+  docker exec -it $combo bash
+}
+
+#--- docker-sync checker
+export DOCKER_SYNC_CHECKER="/Users/brendanshanny/SecureDocs/source/vdr-app/docker-sync-checker.txt"
+export DOCKER_SYNC_LOG="/Users/brendanshanny/SecureDocs/source/vdr-app/.docker-sync/daemon.log"
